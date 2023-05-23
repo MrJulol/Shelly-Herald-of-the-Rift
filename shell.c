@@ -34,7 +34,7 @@ void strtrim(char *string)
 
 void start_menu()
 {
-    // clrscr();
+    clrscr();
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
