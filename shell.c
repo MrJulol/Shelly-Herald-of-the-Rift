@@ -100,25 +100,30 @@ void cat(char *input)
 void get_command()
 {
     int buffersize_command = 100;
+    
     char buffer[buffersize_command];
     fflush(stdin);
     fgets(buffer, buffersize_command, stdin);
     strtrim(buffer);
-    if (buffer[0] == 't')
+    if (buffer[0] == 't' && buffer[1] == 'o' && buffer[2] == 'u' && buffer[3] == 'c' && buffer[4] == 'h' && buffer[5] == ' ')
     {
         touch(buffer);
     }
-    if (buffer[0] == 'l')
+    if (buffer[0] == 'l' && buffer[1] == 's' && buffer[2] == ' ')
     {
-        // call ls command
+        ls(buffer);
     }
-    if (buffer[0] == 's')
+    if (buffer[0] == 's' && buffer[1] == 'l')
     {
         sl();
     }
-    if (buffer[0] == 'c' && buffer[1] == 'a')
+    if (buffer[0] == 'c' && buffer[1] == 'a' && buffer[2] == 't' && buffer[3] == ' ')
     {
         cat(buffer);
+    }
+    if (buffer[0] == 'm' && buffer[1] == 'k' && buffer[2] == 'd' && buffer[3] == 'i' && buffer[4] == 'r' && buffer[5] == ' ')
+    {
+        mkdir(buffer);
     }
 }
 
