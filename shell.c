@@ -161,7 +161,7 @@ void echo(char *input)
 
 void whoami()
 {
-    printf("I am the great Sir George William Washington Herald the Rift the third. Found in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
+    printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
 }
 
 void get_command()
@@ -204,7 +204,7 @@ void get_command()
     {
         echo(buffer);
     }
-    if (buffer[0] == 'w' && buffer[1] == 'h' && buffer[2] == 'o' && buffer[3] == 'a' && buffer[4] == 'm' && buffer[5] == 'i' && buffer[6] == ' ')
+    if (buffer[0] == 'w')
     {
         whoami();
     }
