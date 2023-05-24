@@ -148,6 +148,17 @@ void rm(char *input)
 //     }
 // }
 
+void echo(char *input)
+{
+    char name[100];
+    for (int i = 5; i <= strlen(input); i++)
+    {
+        name[i - 5] = input[i];
+    }
+
+    printf("%s\n", name);
+}
+
 void get_command()
 {
     int buffersize_command = 100;
@@ -176,13 +187,17 @@ void get_command()
     {
         mkdir(buffer);
     }
-    if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ' && buffer[3] == '-' && buffer[4] == 'r' && buffer[5] == ' ')
-    {
-        rmr(buffer);
-    }
+    // if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ' && buffer[3] == '-' && buffer[4] == 'r' && buffer[5] == ' ')
+    // {
+    //     rmr(buffer);
+    // }
     if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ')
     {
         rm(buffer);
+    }
+    if (buffer[0] == 'e' && buffer[1] == 'c' && buffer[2] == 'h' && buffer[3] == 'o' && buffer[4] == ' ')
+    {
+        echo(buffer);
     }
 }
 
