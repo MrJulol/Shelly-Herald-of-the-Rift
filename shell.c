@@ -104,6 +104,18 @@ void cat(char *input)
 
 void mkdir(char *input)
 {
+    int pid = fork();
+	
+	if(!pid){
+		
+		char name[100];
+		
+		for (int i = 6; i <= strlen(input); i++)
+        		name[i - 6] = input[i];
+        		
+        	execl("/bin/mkdir", "mkdir", name, NULL);
+		
+	}
 }
 
 void ls(char *input)
