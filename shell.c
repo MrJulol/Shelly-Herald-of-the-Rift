@@ -159,6 +159,10 @@ void echo(char *input)
     printf("%s\n", name);
 }
 
+void whoami()
+{
+}
+
 void get_command()
 {
     int buffersize_command = 100;
@@ -198,6 +202,10 @@ void get_command()
     if (buffer[0] == 'e' && buffer[1] == 'c' && buffer[2] == 'h' && buffer[3] == 'o' && buffer[4] == ' ')
     {
         echo(buffer);
+    }
+    if (buffer[0] == 'w' && buffer[1] == 'h' && buffer[2] == 'o' && buffer[3] == 'a' && buffer[4] == 'm' && buffer[5] == 'i' && buffer[6] == ' ')
+    {
+        whoami();
     }
 }
 
