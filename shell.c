@@ -38,7 +38,7 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, ls, rm, mkdir, sl (ADD COMMANDS HERE)\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami (ADD COMMANDS HERE)\n");
 }
 
 void userbar()
@@ -161,6 +161,7 @@ void echo(char *input)
 
 void whoami()
 {
+    printf("I am the great Sir George William Washington Herald the Rift the third. Found in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
 }
 
 void get_command()
