@@ -102,6 +102,14 @@ void cat(char *input)
     printf("\n");
 }
 
+void mkdir(char *input)
+{
+}
+
+void ls(char *input)
+{
+}
+
 void get_command()
 {
     int buffersize_command = 100;
