@@ -120,6 +120,34 @@ void ls(char *input)
 {
 }
 
+void rm(char *input)
+{
+    char name[100];
+    int pid = fork();
+    for (int i = 3; i <= strlen(input); i++)
+    {
+        name[i - 3] = input[i];
+    }
+    if (!pid)
+    {
+        execl("/bin/rm", "rm", name, NULL);
+    }
+}
+
+// void rmr(char *input) //! Throws an error
+// {
+//     char name[100];
+//     int pid = fork();
+//     for (int i = 6; i <= strlen(input); i++)
+//     {
+//         name[i - 6] = input[i];
+//     }
+//     if (!pid)
+//     {
+//         execl("/bin/rm", "/bin/rm", "-r", name, NULL);
+//     }
+// }
+
 void get_command()
 {
     int buffersize_command = 100;
@@ -147,6 +175,14 @@ void get_command()
     if (buffer[0] == 'm' && buffer[1] == 'k' && buffer[2] == 'd' && buffer[3] == 'i' && buffer[4] == 'r' && buffer[5] == ' ')
     {
         mkdir(buffer);
+    }
+    if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ' && buffer[3] == '-' && buffer[4] == 'r' && buffer[5] == ' ')
+    {
+        rmr(buffer);
+    }
+    if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ')
+    {
+        rm(buffer);
     }
 }
 
