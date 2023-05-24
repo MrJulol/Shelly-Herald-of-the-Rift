@@ -41,6 +41,11 @@ void start_menu()
     printf("Usable Commands: touch, ls (ADD COMMANDS HERE)\n");
 }
 
+void userbar()
+{
+    printf("Shelly@User >");
+}
+
 void touch(char *input)
 {
     char name[100];
@@ -100,7 +105,7 @@ void cat(char *input)
 void get_command()
 {
     int buffersize_command = 100;
-    
+
     char buffer[buffersize_command];
     fflush(stdin);
     fgets(buffer, buffersize_command, stdin);
@@ -125,11 +130,6 @@ void get_command()
     {
         mkdir(buffer);
     }
-}
-
-void userbar()
-{
-    printf("Shelly@User >");
 }
 
 int main()
