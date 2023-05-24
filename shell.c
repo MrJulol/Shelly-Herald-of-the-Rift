@@ -38,7 +38,7 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, ls (ADD COMMANDS HERE)\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl (ADD COMMANDS HERE)\n");
 }
 
 void userbar()
