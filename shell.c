@@ -6,35 +6,16 @@
 #include <sys/types.h>
 #include <signal.h>
 
-#ifdef __APPLE__
-#define clrscr() system("clear")
-#define HELLO() printf("Hey Apple User!\n")
-#elif _Windows
-#define clrscr() system("cls")
-#define HELLO() printf("Hey you poor Windows user\n")
-#elif __linux__
-#define clrscr() system("clear")
-#define HELLO() printf("You Gigachad Linux User\n")
-#else
-#define clrscr() printf("GET A GOOD PC\n")
-#define HELLO() printf("What dafuq are you running as OS\n")
-#endif
-
-int event_loop = 1;
+int event_loop = 1; // Variable to define loop
 
 void end_event_loop()
 {
     event_loop = 0;
 }
 
-void strtrim(char *string)
-{
-    string[strlen(string) - 1] = '\0';
-}
-
 void start_menu()
 {
-    clrscr();
+    // clrscr();
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
@@ -44,6 +25,71 @@ void start_menu()
 void userbar()
 {
     printf("Shelly@User >");
+}
+
+void strtrim(char *string)
+{
+    string[strlen(string) - 1] = '\0';
+}
+
+void clrscr()
+{
+    system("clear");
+}
+
+void get_command()
+{
+    int max_userinput = 100;
+
+    char user_Input[max_userinput];
+    fflush(stdin);
+    fgets(user_Input, max_userinput, stdin);
+    strtrim(user_Input);
+    if (user_Input[0] == 't' && user_Input[1] == 'o' && user_Input[2] == 'u' && user_Input[3] == 'c' && user_Input[4] == 'h' && user_Input[5] == ' ')
+    {
+        touch(user_Input);
+    }
+    else if (user_Input[0] == 'l' && user_Input[1] == 's' && user_Input[2] == ' ')
+    {
+        ls(user_Input);
+    }
+    else if (user_Input[0] == 's' && user_Input[1] == 'l')
+    {
+        sl();
+    }
+    else if (user_Input[0] == 'c' && user_Input[1] == 'a' && user_Input[2] == 't' && user_Input[3] == ' ')
+    {
+        cat(user_Input);
+    }
+    else if (user_Input[0] == 'm' && user_Input[1] == 'k' && user_Input[2] == 'd' && user_Input[3] == 'i' && user_Input[4] == 'r' && user_Input[5] == ' ')
+    {
+        mkdir(user_Input);
+    }
+    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ' && user_Input[3] == '-' && user_Input[4] == 'r' && user_Input[5] == ' ')
+    {
+        rmr(user_Input);
+    }
+    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ')
+    {
+        rm(user_Input);
+    }
+    else if (user_Input[0] == 'e' && user_Input[1] == 'c' && user_Input[2] == 'h' && user_Input[3] == 'o' && user_Input[4] == ' ')
+    {
+        echo(user_Input);
+    }
+    else if (user_Input[0] == 'w')
+    {
+        whoami();
+    }
+    else
+    {
+        no_known_command(user_Input);
+    }
+}
+
+void no_known_command(char *input)
+{
+    printf("%s not known\n", input);
 }
 
 void touch(char *input)
@@ -134,19 +180,19 @@ void rm(char *input)
     }
 }
 
-// void rmr(char *input) //! Throws an error
-// {
-//     char name[100];
-//     int pid = fork();
-//     for (int i = 6; i <= strlen(input); i++)
-//     {
-//         name[i - 6] = input[i];
-//     }
-//     if (!pid)
-//     {
-//         execl("/bin/rm", "/bin/rm", "-r", name, NULL);
-//     }
-// }
+void rmr(char *input)
+{
+    char name[100];
+    int pid = fork();
+    for (int i = 6; i <= strlen(input); i++)
+    {
+        name[i - 6] = input[i];
+    }
+    if (!pid)
+    {
+        execl("/bin/rm", "/bin/rm", "-r", name, NULL);
+    }
+}
 
 void echo(char *input)
 {
@@ -162,52 +208,6 @@ void echo(char *input)
 void whoami()
 {
     printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
-}
-
-void get_command()
-{
-    int buffersize_command = 100;
-
-    char buffer[buffersize_command];
-    fflush(stdin);
-    fgets(buffer, buffersize_command, stdin);
-    strtrim(buffer);
-    if (buffer[0] == 't' && buffer[1] == 'o' && buffer[2] == 'u' && buffer[3] == 'c' && buffer[4] == 'h' && buffer[5] == ' ')
-    {
-        touch(buffer);
-    }
-    if (buffer[0] == 'l' && buffer[1] == 's' && buffer[2] == ' ')
-    {
-        ls(buffer);
-    }
-    if (buffer[0] == 's' && buffer[1] == 'l')
-    {
-        sl();
-    }
-    if (buffer[0] == 'c' && buffer[1] == 'a' && buffer[2] == 't' && buffer[3] == ' ')
-    {
-        cat(buffer);
-    }
-    if (buffer[0] == 'm' && buffer[1] == 'k' && buffer[2] == 'd' && buffer[3] == 'i' && buffer[4] == 'r' && buffer[5] == ' ')
-    {
-        mkdir(buffer);
-    }
-    // if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ' && buffer[3] == '-' && buffer[4] == 'r' && buffer[5] == ' ')
-    // {
-    //     rmr(buffer);
-    // }
-    if (buffer[0] == 'r' && buffer[1] == 'm' && buffer[2] == ' ')
-    {
-        rm(buffer);
-    }
-    if (buffer[0] == 'e' && buffer[1] == 'c' && buffer[2] == 'h' && buffer[3] == 'o' && buffer[4] == ' ')
-    {
-        echo(buffer);
-    }
-    if (buffer[0] == 'w')
-    {
-        whoami();
-    }
 }
 
 int main()
