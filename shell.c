@@ -8,6 +8,8 @@
 
 int event_loop = 1; // Variable to define loop
 
+#define BUFFER_PROCESSED_INPUT 50
+
 void end_event_loop()
 {
     event_loop = 0;
@@ -37,20 +39,20 @@ void clrscr()
     system("clear");
 }
 
-void no_known_command(char *input)
+void no_known_command(char *user_Input)
 {
-    printf("%s not known\n", input);
+    printf("%s not known\n", user_Input);
 }
 
-void touch(char *input)
+void touch(char *user_Input)
 {
-    char name[100];
-    for (int i = 6; i <= strlen(input); i++)
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
+    for (int i = 6; i <= strlen(user_Input); i++)
     {
-        name[i - 6] = input[i];
+        processed_user_Input[i - 6] = user_Input[i];
     }
     FILE *fp;
-    fp = fopen(name, "w");
+    fp = fopen(processed_user_Input, "w");
     fclose(fp);
 }
 
@@ -71,18 +73,18 @@ void sl()
     }
 }
 
-void cat(char *input)
+void cat(char *user_Input)
 {
     char c;
 
-    char name[100];
-    for (int i = 4; i <= strlen(input); i++)
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
+    for (int i = 4; i <= strlen(user_Input); i++)
     {
-        name[i - 4] = input[i];
+        processed_user_Input[i - 4] = user_Input[i];
     }
 
     FILE *fp;
-    fp = fopen(name, "r");
+    fp = fopen(processed_user_Input, "r");
 
     if (fp == NULL)
     {
@@ -98,40 +100,40 @@ void cat(char *input)
     printf("\n");
 }
 
-void mkdir(char *input)
+void mkdir(char *user_Input)
 {
-    char name[100];
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
     int pid = fork();
-    for (int i = 6; i <= strlen(input); i++)
+    for (int i = 6; i <= strlen(user_Input); i++)
     {
-        name[i - 6] = input[i];
+        processed_user_Input[i - 6] = user_Input[i];
     }
     if (!pid)
     {
-        execl("/bin/mkdir", "mkdir", name, NULL);
+        execl("/bin/mkdir", "mkdir", processed_user_Input, NULL);
     }
 }
 
-void ls(char *input)
+void ls(char *user_Input)
 {
 
     int pid = fork();
     if (!pid)
     {
-        if (strlen(input) == 2)
+        if (strlen(user_Input) == 2)
         {
             execl("/bin/ls", "/bin/ls", NULL);
         }
-        else if (strlen(input) == 5)
+        else if (strlen(user_Input) == 5)
         {
             char arg1[3];
             for (int i = 0; i < 2; i++)
             {
-                arg1[i] = input[i + 3];
+                arg1[i] = user_Input[i + 3];
             }
             execl("/bin/ls", "/bin/ls", arg1, NULL);
         }
-        else if (strlen(input) == 6)
+        else if (strlen(user_Input) == 6)
         {
             char arg1[3];
             char arg2[3] = {'-',
@@ -140,8 +142,8 @@ void ls(char *input)
 
             for (int i = 0; i < 2; i++)
             {
-                arg1[i] = input[i + 3];
-                arg2[i + 1] = input[i + 5];
+                arg1[i] = user_Input[i + 3];
+                arg2[i + 1] = user_Input[i + 5];
             }
             arg1[2] = '\0';
             arg2[2] = '\0';
@@ -154,8 +156,8 @@ void ls(char *input)
 
             for (int i = 0; i < 2; i++)
             {
-                arg1[i] = input[i + 3];
-                arg2[i] = input[i + 6];
+                arg1[i] = user_Input[i + 3];
+                arg2[i] = user_Input[i + 6];
             }
             arg1[2] = '\0';
             arg2[2] = '\0';
@@ -169,43 +171,43 @@ void ls(char *input)
     }
 }
 
-void rm(char *input)
+void rm(char *user_Input)
 {
-    char name[100];
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
     int pid = fork();
-    for (int i = 3; i <= strlen(input); i++)
+    for (int i = 3; i <= strlen(user_Input); i++)
     {
-        name[i - 3] = input[i];
+        processed_user_Input[i - 3] = user_Input[i];
     }
     if (!pid)
     {
-        execl("/bin/rm", "rm", name, NULL);
+        execl("/bin/rm", "rm", processed_user_Input, NULL);
     }
 }
 
-void rmr(char *input)
+void rmr(char *user_Input)
 {
-    char name[100];
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
     int pid = fork();
-    for (int i = 6; i <= strlen(input); i++)
+    for (int i = 6; i <= strlen(user_Input); i++)
     {
-        name[i - 6] = input[i];
+        processed_user_Input[i - 6] = user_Input[i];
     }
     if (!pid)
     {
-        execl("/bin/rm", "/bin/rm", "-r", name, NULL);
+        execl("/bin/rm", "/bin/rm", "-r", processed_user_Input, NULL);
     }
 }
 
-void echo(char *input)
+void echo(char *user_Input)
 {
-    char name[100];
-    for (int i = 5; i <= strlen(input); i++)
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
+    for (int i = 5; i <= strlen(user_Input); i++)
     {
-        name[i - 5] = input[i];
+        processed_user_Input[i - 5] = user_Input[i];
     }
 
-    printf("%s\n", name);
+    printf("%s\n", processed_user_Input);
 }
 
 void whoami()
@@ -213,14 +215,14 @@ void whoami()
     printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
 }
 
-void cd(char *input)
+void cd(char *user_Input)
 {
-    char name[100];
-    for (int i = 3; i < strlen(input); i++)
+    char processed_user_Input[BUFFER_PROCESSED_INPUT];
+    for (int i = 3; i < strlen(user_Input); i++)
     {
-        name[i - 3] = input[i];
+        processed_user_Input[i - 3] = user_Input[i];
     }
-    if (chdir(name) != 0)
+    if (chdir(processed_user_Input) != 0)
         perror("chdir()failed");
 }
 
