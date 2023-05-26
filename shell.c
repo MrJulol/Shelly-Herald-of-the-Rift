@@ -37,56 +37,6 @@ void clrscr()
     system("clear");
 }
 
-void get_command()
-{
-    int max_userinput = 100;
-
-    char user_Input[max_userinput];
-    fflush(stdin);
-    fgets(user_Input, max_userinput, stdin);
-    strtrim(user_Input);
-    if (user_Input[0] == 't' && user_Input[1] == 'o' && user_Input[2] == 'u' && user_Input[3] == 'c' && user_Input[4] == 'h' && user_Input[5] == ' ')
-    {
-        touch(user_Input);
-    }
-    else if (user_Input[0] == 'l' && user_Input[1] == 's' && user_Input[2] == ' ')
-    {
-        ls(user_Input);
-    }
-    else if (user_Input[0] == 's' && user_Input[1] == 'l')
-    {
-        sl();
-    }
-    else if (user_Input[0] == 'c' && user_Input[1] == 'a' && user_Input[2] == 't' && user_Input[3] == ' ')
-    {
-        cat(user_Input);
-    }
-    else if (user_Input[0] == 'm' && user_Input[1] == 'k' && user_Input[2] == 'd' && user_Input[3] == 'i' && user_Input[4] == 'r' && user_Input[5] == ' ')
-    {
-        mkdir(user_Input);
-    }
-    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ' && user_Input[3] == '-' && user_Input[4] == 'r' && user_Input[5] == ' ')
-    {
-        rmr(user_Input);
-    }
-    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ')
-    {
-        rm(user_Input);
-    }
-    else if (user_Input[0] == 'e' && user_Input[1] == 'c' && user_Input[2] == 'h' && user_Input[3] == 'o' && user_Input[4] == ' ')
-    {
-        echo(user_Input);
-    }
-    else if (user_Input[0] == 'w')
-    {
-        whoami();
-    }
-    else
-    {
-        no_known_command(user_Input);
-    }
-}
-
 void no_known_command(char *input)
 {
     printf("%s not known\n", input);
@@ -164,6 +114,59 @@ void mkdir(char *input)
 
 void ls(char *input)
 {
+
+    int pid = fork();
+    if (!pid)
+    {
+        if (strlen(input) == 2)
+        {
+            execl("/bin/ls", "/bin/ls", NULL);
+        }
+        else if (strlen(input) == 5)
+        {
+            char arg1[3];
+            for (int i = 0; i < 2; i++)
+            {
+                arg1[i] = input[i + 3];
+            }
+            execl("/bin/ls", "/bin/ls", arg1, NULL);
+        }
+        else if (strlen(input) == 6)
+        {
+            char arg1[3];
+            char arg2[3] = {'-',
+                            '-',
+                            '\0'};
+
+            for (int i = 0; i < 2; i++)
+            {
+                arg1[i] = input[i + 3];
+                arg2[i + 1] = input[i + 5];
+            }
+            arg1[2] = '\0';
+            arg2[2] = '\0';
+            execl("/bin/ls", "/bin/ls", arg1, arg2, NULL);
+        }
+        else
+        {
+            char arg1[3];
+            char arg2[3];
+
+            for (int i = 0; i < 2; i++)
+            {
+                arg1[i] = input[i + 3];
+                arg2[i] = input[i + 6];
+            }
+            arg1[2] = '\0';
+            arg2[2] = '\0';
+
+            execl("/bin/ls", "/bin/ls", arg1, arg2, NULL);
+        }
+    }
+    else
+    {
+        wait(NULL);
+    }
 }
 
 void rm(char *input)
@@ -208,6 +211,56 @@ void echo(char *input)
 void whoami()
 {
     printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
+}
+
+void get_command()
+{
+    int max_userinput = 100;
+
+    char user_Input[max_userinput];
+    fflush(stdin);
+    fgets(user_Input, max_userinput, stdin);
+    strtrim(user_Input);
+    if (user_Input[0] == 't' && user_Input[1] == 'o' && user_Input[2] == 'u' && user_Input[3] == 'c' && user_Input[4] == 'h' && user_Input[5] == ' ')
+    {
+        touch(user_Input);
+    }
+    else if (user_Input[0] == 'l' && user_Input[1] == 's')
+    {
+        ls(user_Input);
+    }
+    else if (user_Input[0] == 's' && user_Input[1] == 'l')
+    {
+        sl();
+    }
+    else if (user_Input[0] == 'c' && user_Input[1] == 'a' && user_Input[2] == 't' && user_Input[3] == ' ')
+    {
+        cat(user_Input);
+    }
+    else if (user_Input[0] == 'm' && user_Input[1] == 'k' && user_Input[2] == 'd' && user_Input[3] == 'i' && user_Input[4] == 'r' && user_Input[5] == ' ')
+    {
+        mkdir(user_Input);
+    }
+    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ' && user_Input[3] == '-' && user_Input[4] == 'r' && user_Input[5] == ' ')
+    {
+        rmr(user_Input);
+    }
+    else if (user_Input[0] == 'r' && user_Input[1] == 'm' && user_Input[2] == ' ')
+    {
+        rm(user_Input);
+    }
+    else if (user_Input[0] == 'e' && user_Input[1] == 'c' && user_Input[2] == 'h' && user_Input[3] == 'o' && user_Input[4] == ' ')
+    {
+        echo(user_Input);
+    }
+    else if (user_Input[0] == 'w')
+    {
+        whoami();
+    }
+    else
+    {
+        no_known_command(user_Input);
+    }
 }
 
 int main()
