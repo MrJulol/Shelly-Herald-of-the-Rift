@@ -19,7 +19,7 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, !!ls!!, rm, mkdir, sl, echo, whoami (ADD COMMANDS HERE)\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat (ADD COMMANDS HERE\n)");
 }
 
 void userbar()
@@ -213,6 +213,17 @@ void whoami()
     printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
 }
 
+void cd(char *input)
+{
+    char name[100];
+    for (int i = 3; i < strlen(input); i++)
+    {
+        name[i - 3] = input[i];
+    }
+    if (chdir(name) != 0)
+        perror("chdir()failed");
+}
+
 void get_command()
 {
     int max_userinput = 100;
@@ -256,6 +267,10 @@ void get_command()
     else if (user_Input[0] == 'w')
     {
         whoami();
+    }
+    else if (user_Input[0] == 'c' && user_Input[1] == 'd' && user_Input[2] == ' ')
+    {
+        cd(user_Input);
     }
     else
     {
