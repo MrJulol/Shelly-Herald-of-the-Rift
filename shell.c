@@ -253,6 +253,11 @@ void cd(char *user_Input)
         perror("chdir()failed");
 }
 
+void clear()
+{
+    system("clear");
+}
+
 void get_command()
 {
     int max_userinput = 100;
@@ -309,6 +314,10 @@ void get_command()
     else if (user_Input[0] == 'c' && user_Input[1] == 'h' && user_Input[2] == 'm' && user_Input[3] == 'o' && user_Input[4] == 'd' && user_Input[5] == ' ')
     {
         chmod(user_Input);
+    }
+    else if (user_Input[0] == 'c' && user_Input[1] == 'l' && user_Input[2] == 'e' && user_Input[3] == 'a' && user_Input[4] == 'r')
+    {
+        clear();
     }
     else
     {
