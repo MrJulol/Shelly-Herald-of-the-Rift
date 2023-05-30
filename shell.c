@@ -13,6 +13,8 @@ int event_loop = 1; // Variable to define loop
 void end_event_loop()
 {
     event_loop = 0;
+    printf("\n");
+    raise(SIGQUIT);
 }
 
 void clrscr()
