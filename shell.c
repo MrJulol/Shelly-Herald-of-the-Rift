@@ -325,11 +325,11 @@ int main()
     signal(SIGINT, end_event_loop);
 
     start_menu();
-    while (event_loop)
+    do
     {
         userbar();
         get_command();
-    }
+    } while (event_loop);
 
     return EXIT_SUCCESS;
 }
