@@ -5,7 +5,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <signal.h>
-#include <time.h>
 
 int event_loop = 1; // Variable to define loop
 
