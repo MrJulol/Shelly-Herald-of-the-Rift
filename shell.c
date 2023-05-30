@@ -15,6 +15,11 @@ void end_event_loop()
     event_loop = 0;
 }
 
+void clrscr()
+{
+    system("clear");
+}
+
 void start_menu()
 {
     clrscr();
@@ -32,11 +37,6 @@ void userbar()
 void strtrim(char *string)
 {
     string[strlen(string) - 1] = '\0';
-}
-
-void clrscr()
-{
-    system("clear");
 }
 
 void no_known_command(char *user_Input)
