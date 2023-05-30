@@ -17,7 +17,7 @@ void end_event_loop()
 
 void start_menu()
 {
-    // clrscr();
+    clrscr();
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
@@ -253,11 +253,6 @@ void cd(char *user_Input)
         perror("chdir()failed");
 }
 
-void clear()
-{
-    system("clear");
-}
-
 void get_command()
 {
     int max_userinput = 100;
@@ -317,7 +312,7 @@ void get_command()
     }
     else if (user_Input[0] == 'c' && user_Input[1] == 'l' && user_Input[2] == 'e' && user_Input[3] == 'a' && user_Input[4] == 'r')
     {
-        clear();
+        clrscr();
     }
     else
     {
