@@ -22,7 +22,7 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat and help\n");
 }
 
 void userbar()
@@ -236,7 +236,7 @@ void whoami()
 
 void help()
 {
-    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat and help\n");
 }
 
 void cd(char *user_Input)
@@ -264,8 +264,8 @@ void get_command()
     }
     else if (user_Input[0] == 'l' && user_Input[1] == 's')
     {
-        // ls_exec(user_Input);
-        ls_pipe(user_Input);
+        ls_exec(user_Input);
+        // ls_pipe(user_Input);
     }
     else if (user_Input[0] == 's' && user_Input[1] == 'l')
     {
@@ -299,7 +299,7 @@ void get_command()
     {
         cd(user_Input);
     }
-    else if (user_Input[0] == 'h' && user_Input[1] == 'e' && user_Input[2] == 'l' && user_Input[2] == 'l' && user_Input[2] == 'p' && user_Input[2] == ' ')
+    else if (user_Input[0] == 'h' && user_Input[1] == 'e' && user_Input[2] == 'l' && user_Input[3] == 'p')
     {
         help();
     }
