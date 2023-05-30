@@ -234,6 +234,11 @@ void whoami()
     printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
 }
 
+void help()
+{
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat\n");
+}
+
 void cd(char *user_Input)
 {
     char processed_user_Input[BUFFER_PROCESSED_INPUT];
@@ -293,6 +298,10 @@ void get_command()
     else if (user_Input[0] == 'c' && user_Input[1] == 'd' && user_Input[2] == ' ')
     {
         cd(user_Input);
+    }
+    else if (user_Input[0] == 'h' && user_Input[1] == 'e' && user_Input[2] == 'l' && user_Input[2] == 'l' && user_Input[2] == 'p' && user_Input[2] == ' ')
+    {
+        help();
     }
     else
     {
