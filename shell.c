@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <time.h>
 
 int event_loop = 1; // Variable to define loop
 
@@ -21,7 +22,7 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat (ADD COMMANDS HERE\n)");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, catx\n");
 }
 
 void userbar()
@@ -114,7 +115,7 @@ void mkdir(char *user_Input)
     }
 }
 
-void ls(char *user_Input)
+void ls_exec(char *user_Input)
 {
 
     int pid = fork();
@@ -169,6 +170,24 @@ void ls(char *user_Input)
     {
         wait(NULL);
     }
+}
+
+void ls_pipe(char *user_Input)
+{
+    char buffer[1024];
+    FILE *pipe = popen(user_Input, "r");
+    if (pipe == NULL)
+    {
+        perror("Pipe in ls_pipe");
+        event_loop++;
+    }
+
+    while (fgets(buffer, sizeof(buffer), pipe) != NULL)
+    {
+        strcat(buffer, "\n");
+        printf("%s", buffer);
+    }
+    pclose(pipe);
 }
 
 void rm(char *user_Input)
@@ -240,7 +259,8 @@ void get_command()
     }
     else if (user_Input[0] == 'l' && user_Input[1] == 's')
     {
-        ls(user_Input);
+        // ls_exec(user_Input);
+        ls_pipe(user_Input);
     }
     else if (user_Input[0] == 's' && user_Input[1] == 'l')
     {
