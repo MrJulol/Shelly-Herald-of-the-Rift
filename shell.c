@@ -267,7 +267,7 @@ void troll()
     pid = fork();
     if (pid == 0)
     {
-        execl("~/Desktop/troll", "~/Desktop/troll", NULL);
+        execl("/Users/mrjulol/Desktop/troll", "Users/mrjulol/Desktop/troll", NULL);
     }
 }
 
