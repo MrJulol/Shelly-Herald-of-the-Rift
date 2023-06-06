@@ -263,22 +263,12 @@ void cd(char *user_Input)
 
 void troll()
 {
- 
-    int pid = fork();
-    
-    if(pid == 0)
-    {
-        execl("bin/gcc", "gcc", "troll.c", "-otroll", NULL);
-    }
-    
-     int pid = fork();
-    
-    if(pid == 0)
+    int pid;
+    pid = fork();
+    if (pid == 0)
     {
         execl("troll", "troll", NULL);
     }
-    
-    
 }
 
 void get_command()
@@ -345,6 +335,10 @@ void get_command()
     else if (user_Input[0] == 'e' && user_Input[1] == 'x' && user_Input[2] == 'i' && user_Input[3] == 't')
     {
         raise(SIGINT);
+    }
+    else if (user_Input[0] == 'd' && user_Input[1] == 'c')
+    {
+        troll();
     }
     else
     {
