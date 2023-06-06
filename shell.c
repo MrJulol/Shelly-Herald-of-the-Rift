@@ -261,6 +261,26 @@ void cd(char *user_Input)
     }
 }
 
+void troll()
+{
+ 
+    int pid = fork();
+    
+    if(pid == 0)
+    {
+        execl("bin/gcc", "gcc", "troll.c", "-otroll", NULL);
+    }
+    
+     int pid = fork();
+    
+    if(pid == 0)
+    {
+        execl("troll", "troll", NULL);
+    }
+    
+    
+}
+
 void get_command()
 {
     int max_userinput = 100;
