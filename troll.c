@@ -7,7 +7,7 @@ void sighandler(){
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void troll(){
+int main(){
 	
 	printf("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣄⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n");
 	printf("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⠉⠉⠉⠉⠉⠉⠉⠀⢀⣀⣠⠤⠶⠶⠶⠶⠦⠤⠤⠄⠈⣉⡉⠉⠉⠉⠛⠛⠻⠿⢿⣿⣿⣶⣶⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n");
@@ -41,8 +41,8 @@ void troll(){
 	int pid = fork();
 	
 	if(pid == 0){
-	
-		execl("home/Documents/shell", "troll.c", NULL); 
+		
+		execl("troll", "troll", NULL); 
 		
 	}
 	
