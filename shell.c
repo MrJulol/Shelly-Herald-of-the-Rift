@@ -10,16 +10,18 @@ int event_loop = 1; // Variable to define loop
 
 #define BUFFER_PROCESSED_INPUT 50
 
-void end_event_loop()
-{
-    event_loop = 0;
-    printf("\n");
-    raise(SIGQUIT);
-}
-
 void clrscr()
 {
     system("clear");
+}
+
+void end_event_loop()
+{
+    event_loop = 0;
+    clrscr();
+    printf("The Rift Herald has been slain\t\t┌∩┐(◣_◢)┌∩┐\n");
+    printf("\n");
+    raise(SIGQUIT);
 }
 
 void start_menu()
@@ -28,10 +30,10 @@ void start_menu()
     printf("Shelly, Herald of the Rift\n");
     printf("Version 1.0\n");
     printf("By Juls, aLeg, iVan and Schle\n");
-    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat and help\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, cd, echo, clear, whoami, cat and help\n");
 }
 
-void userbar()
+void username()
 {
     printf("Shelly@User >");
 }
@@ -236,23 +238,27 @@ void chmod(char *user_Input)
 
 void whoami()
 {
-    printf("\nI am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.");
+    printf("I am the great Sir George William Washington Herald of the Rift the third. \nFound in the top jungle of the summoners rift, in the baron pit after 7 minutes have passed and before 20 minutes.\n");
 }
 
 void help()
 {
-    printf("Usable Commands: touch, ls, rm, mkdir, sl, echo, whoami, cat and help\n");
+    printf("Usable Commands: touch, ls, rm, mkdir, sl, cd, echo, clear, whoami, cat and help\n");
 }
 
 void cd(char *user_Input)
 {
     char processed_user_Input[BUFFER_PROCESSED_INPUT];
+    printf("%s\n\n", user_Input);
     for (int i = 3; i < strlen(user_Input); i++)
     {
         processed_user_Input[i - 3] = user_Input[i];
     }
+    printf("%s", processed_user_Input);
     if (chdir(processed_user_Input) != 0)
+    {
         perror("chdir()failed");
+    }
 }
 
 void get_command()
@@ -316,6 +322,10 @@ void get_command()
     {
         clrscr();
     }
+    else if (user_Input[0] == 'e' && user_Input[1] == 'x' && user_Input[2] == 'i' && user_Input[3] == 't')
+    {
+        raise(SIGINT);
+    }
     else
     {
         no_known_command(user_Input);
@@ -329,7 +339,7 @@ int main()
     start_menu();
     do
     {
-        userbar();
+        username();
         get_command();
     } while (event_loop);
 
